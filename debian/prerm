@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+PKG="flash"
+VER="1.0.2"
+PKG_DIR=/usr/lib/${PKG}${VER}
+
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/bin/flash ]; then
+    for pathname in ${PKG_DIR}/bin/*; do
+        filename=`basename $pathname`
+        update-alternatives --remove ${filename} /usr/bin/${filename}${VER}
+    done
+fi

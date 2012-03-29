@@ -1,0 +1,11 @@
+Source: flash1.0.2
+Section: science
+Priority: optional
+Build-Depends: gcc
+Maintainer: flash.comment@gmail.com
+Standards-Version: 3.8.3
+Homepage: http://genomics.jhu.edu/software/FLASH/index.shtml
+
+Package: flash1.0.2
+Architecture: amd64
+Description: FLASH, Fast Length Adjustment of SHort reads, is a very accurate fast tool to merge paired-end reads from fragments that are shorter than twice the length of reads. The extended length of reads has a significant positive impact on improvement of genome assemblies.
