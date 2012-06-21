@@ -1,3 +1,9 @@
+flash1.0.2 (1.0.2-2) lucid; urgency=low
+
+  * fixed /usr/bin/flash1.0.2 to correctly pass arguments
+
+ -- Nathaniel Nutter <nnutter@genome.wustl.edu>  Thu, 21 Jun 2012 14:09:23 -0500
+
 flash1.0.2 (1.0.2) unstable; urgency=low
 
   * make a package
