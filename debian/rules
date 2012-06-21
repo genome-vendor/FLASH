@@ -9,9 +9,6 @@ PKG_LIB_DIR=/usr/lib/$(PKG)
 %:
 	dh $@
 
-build:
-	sh buildBinaries.sh
-
 override_dh_auto_install:
 	mkdir -p $(DEB_DIR)$(PKG_LIB_DIR)/bin
 	mkdir -p $(DEB_DIR)/usr/bin
