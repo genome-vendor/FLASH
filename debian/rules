@@ -1,8 +1,10 @@
 #!/usr/bin/make -f
 
-PKG=flash1.0.2
+PRG=flash
 VER=1.0.2
-DEB_DIR=debian/${PKG}
+PKG=$(PRG)$(VER)
+DEB_DIR=debian/$(PKG)
+PKG_LIB_DIR=/usr/lib/$(PKG)
 
 %:
 	dh $@
@@ -11,10 +13,9 @@ build:
 	sh buildBinaries.sh
 
 override_dh_auto_install:
-	mkdir -p ${DEB_DIR}/usr/lib/${PKG}/bin
-	mkdir -p ${DEB_DIR}/usr/bin
-	for filename in 'flash'; do \
-		install -m755 $${filename} ${DEB_DIR}/usr/lib/${PKG}/bin/$${filename}; \
-		echo "export PATH=/usr/lib/${PKG}/bin/:\$$PATH; exec $$filename \"$@\"" >  ${DEB_DIR}/usr/bin/$${filename}${VER}; \
+	mkdir -p $(DEB_DIR)$(PKG_LIB_DIR)/bin
+	mkdir -p $(DEB_DIR)/usr/bin
+	for filename in $$(ls $(PRG)); do \
+		install -m755 $${filename} $(DEB_DIR)$(PKG_LIB_DIR)/bin/; \
+		echo '#!/bin/sh\nexport PATH=$(PKG_LIB_DIR)/bin:$${PATH}\nexec' $${filename} '"$$@"' > $(DEB_DIR)/usr/bin/$${filename}$(VER); \
 		done
-
