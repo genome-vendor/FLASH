@@ -5,14 +5,19 @@ VER=1.0.2
 PKG=$(PRG)$(VER)
 DEB_DIR=debian/$(PKG)
 PKG_LIB_DIR=/usr/lib/$(PKG)
+BIN_LIST=flash
+BIN_WRAPPER=\
+'\#!/bin/sh\n'\
+'export PATH=$(PKG_LIB_DIR)/bin:$$PATH\n'\
+"exec $${BIN}" '"$$@"'
 
 %:
 	dh $@
 
 override_dh_auto_install:
-	mkdir -p $(DEB_DIR)$(PKG_LIB_DIR)/bin
-	mkdir -p $(DEB_DIR)/usr/bin
-	for filename in $$(ls $(PRG)); do \
-		install -m755 $${filename} $(DEB_DIR)$(PKG_LIB_DIR)/bin/; \
-		echo '#!/bin/sh\nexport PATH=$(PKG_LIB_DIR)/bin:$${PATH}\nexec' $${filename} '"$$@"' > $(DEB_DIR)/usr/bin/$${filename}$(VER); \
-		done
+	mkdir -p $(DEB_DIR)/usr/bin $(DEB_DIR)$(PKG_LIB_DIR)/bin
+	for BIN in $(BIN_LIST); do \
+		BASE_BIN=$$(basename $${BIN});\
+		install -m 755 $${BIN} $(DEB_DIR)$(PKG_LIB_DIR)/bin/$${BASE_BIN};\
+		echo $(BIN_WRAPPER) | sed 's/^ *//' > $(DEB_DIR)/usr/bin/$${BASE_BIN}$(VER);\
+	done
