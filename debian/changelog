@@ -1,3 +1,9 @@
+flash1.0.2 (1.0.2-3) lucid; urgency=low
+
+  * added debhelper as a build dependency
+
+ -- Nathaniel Nutter <nnutter@genome.wustl.edu>  Fri, 22 Jun 2012 10:19:31 -0500
+
 flash1.0.2 (1.0.2-2) lucid; urgency=low
 
   * fixed /usr/bin/flash1.0.2 to correctly pass arguments
