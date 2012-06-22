@@ -1,7 +1,7 @@
 Source: flash1.0.2
 Section: science
 Priority: optional
-Build-Depends: gcc
+Build-Depends: debhelper, gcc
 Maintainer: flash.comment@gmail.com
 Standards-Version: 3.8.3
 Homepage: http://genomics.jhu.edu/software/FLASH/index.shtml
